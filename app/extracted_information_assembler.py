@@ -69,7 +69,7 @@ class ExtractedInformationAssembler:
         Args:
             filename (str): Name of the CSV file to save the data.
         """
-        with open(filename, 'w', newline='', encoding='utf-8') as csvfile:
+        with open(filename, 'w', newline='', encoding='utf-8-sig') as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames=self.extracted_data[0].keys())
             writer.writeheader()
             for data in self.extracted_data:
@@ -91,7 +91,7 @@ if __name__ == "__main__":
             "FamZG": ["Familienzulagen", "famzg", "familienzulage", "familienzulagen"],
             "EAK": ["geschäftsleitung", "eak", "jahresbericht", "andrea steiner"],
             },
-        filter_str="/eak/de/",
+        filter_str="/eak/de/home/EAK/unsere-leistungen/",
         content_class='main-content'
     )
     assembler.extract_information()
