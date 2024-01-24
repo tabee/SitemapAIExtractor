@@ -72,7 +72,8 @@ class HTMLParser:
             elements = soup.find_all(class_=css_class)
             return ' '.join(element.get_text() for element in elements)
         except requests.RequestException as e:
-            raise requests.RequestException(f"Failed to retrieve content for class {css_class}: {e}")
+            # raise requests.RequestException(f"Failed to retrieve content for class {css_class}: {e}")
+            return f"{css_class} not found"
 
 
 # Example usage
