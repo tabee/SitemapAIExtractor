@@ -20,12 +20,13 @@ Clone the repository and install the necessary dependencies:
 
 ```bash
 git clone https://github.com/tabee/SitemapAIExtractor.git
-cd SitemapAIExtractor/app
+cd SitemapAIExtractor
 pip install -r requirements.txt
 ```
 
 ### Usage
 To use the SitemapAIExtractor, run the main.py script. You can modify the configuration settings in main.py to suit your specific requirements.
 ```bash
+cd app
 python main.py
 ```
