@@ -20,7 +20,7 @@ class ExtractedInformationAssembler:
         save_to_csv(filename): Saves the extracted information to a CSV file.
     """
 
-    def __init__(self, sitemap_url, rules_for_url, rules_for_content, filter_str, content_class):
+    def __init__(self, sitemap_url, rules_for_url, rules_for_content, filter_urls_by, content_class):
         """
         Initializes the ExtractedInformationAssembler with all necessary components.
 
@@ -35,7 +35,7 @@ class ExtractedInformationAssembler:
         self.html_parser = HTMLParser()
         self.url_analyzer = ContentAnalyzer(rules_for_url)
         self.content_analyzer = ContentAnalyzer(rules_for_content)
-        self.filter_str = filter_str
+        self.filter_str = filter_urls_by
         self.content_class = content_class
         self.extracted_data = []
 
@@ -48,6 +48,7 @@ class ExtractedInformationAssembler:
         try:
             filtered_urls = self.sitemap_parser.get_urls(filter_str=self.filter_str)
             for url in filtered_urls:
+                print(f"Extracting information from ...{url[-50:]}")
                 page_title = self.html_parser.get_title(url)
                 page_content = self.html_parser.get_content_by_class(url, self.content_class)
                 page_lead = self.html_parser.get_content_by_class_lead(url)
@@ -80,6 +81,7 @@ class ExtractedInformationAssembler:
                 writer.writerow(data)
 
 # Beispielhafte Verwendung
+# @TODO: Remove this example usage becau we not want make the config in this file
 if __name__ == "__main__":
     assembler = ExtractedInformationAssembler(
         sitemap_url='https://www.eak.admin.ch/eak/de/home.sitemap.xml',
@@ -95,7 +97,7 @@ if __name__ == "__main__":
             "FamZG": ["Familienzulagen", "famzg", "familienzulage", "familienzulagen"],
             "EAK": ["geschäftsleitung", "eak", "jahresbericht", "andrea steiner"],
             },
-        filter_str="/eak/de/home/EAK/unsere-leistungen/",
+        filter_urls_by="/eak/de/home/EAK/unsere-leistungen/",
         content_class='main-content'
     )
     assembler.extract_information()

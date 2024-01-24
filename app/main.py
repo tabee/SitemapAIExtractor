@@ -3,13 +3,18 @@ from extracted_information_assembler import ExtractedInformationAssembler
 
 # Konfiguration für die URL- und Inhaltsanalyse
 sitemap_url = 'https://www.eak.admin.ch/eak/de/home.sitemap.xml'
-filter_str = "/de/"
+filter_urls_by = "/de/"
 content_class = 'main-content'
 
 # Regeln für URL- und Inhaltsanalyse
 rules_for_url = {
-    "Firmen": ["firmen"], 
-    "Private": ["dokumentation"]
+    "Firmen": ["/firmen/"], 
+    "Private": ["/dokumentation/"],
+    "EAK": ["/eak/"],
+    "Publikation": ["/publikationen/"],
+    "Jahresbericht": ["/jahresberichte/"],
+    "News-mitteilung": ["/mitteilungs-archiv/"],
+    "Neuerungen-mitteilung": ["neuerungen"],
 }
 rules_for_content = {
     "AHV": ["alters- und hinterlassenenvorsorge", "ahv", "1. säule"], 
@@ -25,7 +30,7 @@ assembler = ExtractedInformationAssembler(
     sitemap_url=sitemap_url,
     rules_for_url=rules_for_url,
     rules_for_content=rules_for_content,
-    filter_str=filter_str,
+    filter_urls_by=filter_urls_by,
     content_class=content_class
 )
 

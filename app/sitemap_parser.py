@@ -55,11 +55,13 @@ class SitemapParser:
 
             # Extracting URLs
             urls = [url.text for url in root.findall('.//{http://www.sitemaps.org/schemas/sitemap/0.9}loc')]
+            print(f"Found {len(urls)} URLs in sitemap.")
 
             # Applying the filter if provided
             if filter_str:
                 urls = [url for url in urls if filter_str in url]
 
+            print(f"Filtered to {len(urls)} URLs containing '{filter_str}'.")
             return urls
         except ET.ParseError as parse_error:
             raise ET.ParseError(f"Failed to parse XML data: {parse_error}")
