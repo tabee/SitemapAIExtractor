@@ -1,3 +1,4 @@
+""" Main file for the execution of the information extraction. """
 from extracted_information_assembler import ExtractedInformationAssembler
 
 # Konfiguration für die URL- und Inhaltsanalyse
