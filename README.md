@@ -6,6 +6,7 @@ SitemapAIExtractor is a Python-based tool for extracting and analysing informati
 - `sitemap_parser.py`: Parses sitemaps to extract URLs.
 - `html_parser.py`: Parses HTML content from given URLs.
 - `content_analyzer.py`: Analyzes content using predefined keywords and rules.
+- `ai_content_analyzer.py`: Analyzes content using a LMM.
 - `extracted_information_assembler.py`: Orchestrates the extraction of information from URLs in a sitemap and saves the data in a CSV file.
 - `main.py`: The main script for executing the information extraction process.
 
