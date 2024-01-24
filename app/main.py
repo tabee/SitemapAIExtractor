@@ -10,7 +10,6 @@ content_class = 'main-content'
 rules_for_url = {
     "Firmen": ["/firmen/"], 
     "Private": ["/dokumentation/"],
-    "EAK": ["/eak/"],
     "Publikation": ["/publikationen/"],
     "Jahresbericht": ["/jahresberichte/"],
     "News-mitteilung": ["/mitteilungs-archiv/"],
@@ -21,7 +20,7 @@ rules_for_content = {
     "IV": ["Invalidenversicherung", "iv", "invalid"],
     "EO": ["erwerbsausfall", "eo", "erwerbsersatz", "mutterschaft", "vaterschaft"],
     "MSE": ["mutterschaftsentschädigung", "mse"],
-    "FamZG": ["Familienzulagen", "famzg", "familienzulage", "familienzulagen"],
+    "FamZG": ["Familienzulagen", "famzg", "familienzulage"],
     "EAK": ["geschäftsleitung", "eak", "jahresbericht", "andrea steiner"]
 }
 
