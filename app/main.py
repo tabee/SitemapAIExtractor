@@ -2,7 +2,7 @@ from extracted_information_assembler import ExtractedInformationAssembler
 
 # Konfiguration für die URL- und Inhaltsanalyse
 sitemap_url = 'https://www.eak.admin.ch/eak/de/home.sitemap.xml'
-filter_str = "/de/home/Firmen/arbeiten_im_ausland/"
+filter_str = "/de/"
 content_class = 'main-content'
 
 # Regeln für URL- und Inhaltsanalyse

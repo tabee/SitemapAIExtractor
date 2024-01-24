@@ -50,6 +50,8 @@ class ExtractedInformationAssembler:
             for url in filtered_urls:
                 page_title = self.html_parser.get_title(url)
                 page_content = self.html_parser.get_content_by_class(url, self.content_class)
+                page_lead = self.html_parser.get_content_by_class_lead(url)
+                page_last_modified_date = self.html_parser.get_last_modified_date_by_class_text_dimmed(url)
                 url_keywords = self.url_analyzer.analyze_url(url)
                 content_keywords = self.content_analyzer.analyze_content(page_content)
                 
@@ -57,7 +59,9 @@ class ExtractedInformationAssembler:
                     "URL": url,
                     "Page Title": page_title,
                     "URL Keywords": url_keywords,
-                    "Content Keywords": content_keywords
+                    "Content Keywords": content_keywords,
+                    "Page Leadtext": page_lead,
+                    "Page Modified Date": page_last_modified_date,
                 })
         except Exception as e:
             print(f"An error occurred: {e}")
