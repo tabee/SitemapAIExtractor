@@ -86,27 +86,3 @@ class ExtractedInformationAssembler:
             writer.writeheader()
             for data in self.extracted_data:
                 writer.writerow(data)
-
-# Beispielhafte Verwendung
-# @TODO: Remove this example usage becau we not want make the config in this file
-if __name__ == "__main__":
-    assembler = ExtractedInformationAssembler(
-        sitemap_url='https://www.eak.admin.ch/eak/de/home.sitemap.xml',
-        rules_for_url={
-            "Firmen": ["firmen"], 
-            "Private": ["dokumentation"],
-            },
-        rules_for_content={
-            "AHV": ["alters- und hinterlassenenvorsorge", "ahv", "1. säule"], 
-            "IV": ["Invalidenversicherung", " iv", "invalid"],
-            "EO": ["erwerbsausfall", "eo", "erwerbsersatz", "mutterschaft", "vaterschaft"],
-            "MSE": ["mutterschaftsentschädigung", "mse"],
-            "FamZG": ["Familienzulagen", "famzg", "familienzulage", "familienzulagen"],
-            "EAK": ["geschäftsleitung", "eak", "jahresbericht", "andrea steiner"],
-            },
-        filter_urls_by="/eak/de/home/EAK/unsere-leistungen/",
-        content_class='main-content'
-    )
-    assembler.extract_information()
-    assembler.save_to_csv('extracted_data.csv')
-    print("Data extraction and CSV file creation completed.")
