@@ -65,6 +65,7 @@ class ExtractedInformationAssembler:
                     "URL": url,
                     "Page Title": page_title,
                     "URL Keywords": url_keywords,
+                    "URL Thema": url_thema,
                     "Content Keywords": page_content_keywords,
                     "Lead Keywords": page_lead_keywords,
                     "Page Leadtext": page_lead,
