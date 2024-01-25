@@ -20,7 +20,7 @@ class ExtractedInformationAssembler:
         save_to_csv(filename): Saves the extracted information to a CSV file.
     """
 
-    def __init__(self, sitemap_url, rules_for_url, rules_for_content, filter_urls_by, content_class):
+    def __init__(self, sitemap_url, rules_for_url, rules_for_thema_by_url, rules_for_content, filter_urls_by, content_class):
         """
         Initializes the ExtractedInformationAssembler with all necessary components.
 
@@ -34,7 +34,9 @@ class ExtractedInformationAssembler:
         self.sitemap_parser = SitemapParser(sitemap_url)
         self.html_parser = HTMLParser()
         self.url_analyzer = ContentAnalyzer(rules_for_url)
+        self.url_analyzer_for_thema = ContentAnalyzer(rules_for_thema_by_url)
         self.content_analyzer = ContentAnalyzer(rules_for_content)
+        # here will be the AIContentAnalyzer ...
         self.filter_str = filter_urls_by
         self.content_class = content_class
         self.extracted_data = []
@@ -54,13 +56,17 @@ class ExtractedInformationAssembler:
                 page_lead = self.html_parser.get_content_by_class_lead(url)
                 page_last_modified_date = self.html_parser.get_last_modified_date_by_class_text_dimmed(url)
                 url_keywords = self.url_analyzer.analyze_url(url)
-                content_keywords = self.content_analyzer.analyze_content(page_content)
+                url_thema = self.url_analyzer_for_thema.analyze_url(url)
+                page_content_keywords = self.content_analyzer.analyze_content(page_content)
+                page_lead_keywords = self.content_analyzer.analyze_content(page_lead)
+                
                 
                 self.extracted_data.append({
                     "URL": url,
                     "Page Title": page_title,
                     "URL Keywords": url_keywords,
-                    "Content Keywords": content_keywords,
+                    "Content Keywords": page_content_keywords,
+                    "Lead Keywords": page_lead_keywords,
                     "Page Leadtext": page_lead,
                     "Page Modified Date": page_last_modified_date,
                 })
