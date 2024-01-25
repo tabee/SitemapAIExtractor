@@ -17,34 +17,34 @@ rules_for_url = {
 }
 rules_for_thema_by_url = {
     # Firmen
-    "Anschluss": ["/anschluss/"],
-    "Personal": ["/personal/"],
-    "Externe Aufträge": ["/externe_auftraege/"],
-    "Arbeiten im Ausland": ["/arbeiten_im_ausland/"],
-    "Beiträge & Löhne": ["/beitraege_und_loehne/"],
-    "Familienzulagen": ["/familienzulagen/"],
-    "Erwerbsersatzleistungen": ["/erwerbsersatz/"],
-    "connect.eak": ["/connect-eak/"],
+    "Anschluss": ["/anschluss/", "anschluss.html"],
+    "Personal": ["/personal/", "personal.html"],
+    "Externe Aufträge": ["/externe_auftraege/", "externe_auftraege.html"],
+    "Arbeiten im Ausland": ["/arbeiten_im_ausland/", "arbeiten_im_ausland.html"],
+    "Beiträge & Löhne": ["/beitraege_und_loehne/", "beitraege_und_loehne.html"],
+    "Familienzulagen": ["/familienzulagen/", "familienzulagen.html"],
+    "Erwerbsersatzleistungen": ["/erwerbsersatz/", "erwerbsersatz.html"],
+    "connect.eak": ["/connect-eak/", "connect-eak.html"],
     # Private
-    "Mein AHV-Konto": ["/mein_ahv-konto/"],
-    "Zivilstand": ["/zivilstand/"],
-    "Kinder": ["/kinder/"],
-    "Arbeit": ["/arbeit/"],
-    "Arbeitsunterbruch / Keine Erwerbstätigkeit": ["/arbeitsunterbruch_keine_erwerbstaetigkeit/"],
-    "Pensionierung": ["/pensionierung/"],
-    "Im Ausland": ["/im_ausland/"],
-    "Steuerausweis": ["/steuerausweis/"],
+    "Mein AHV-Konto": ["/mein_ahv-konto/", "mein_ahv-konto.html"],
+    "Zivilstand": ["/zivilstand/", "zivilstand.html"],
+    "Kinder": ["/kinder/", "kinder.html"],
+    "Arbeit": ["/arbeit/", "arbeit.html"],
+    "Arbeitsunterbruch / Keine Erwerbstätigkeit": ["/arbeitsunterbruch_keine_erwerbstaetigkeit/", "arbeitsunterbruch_keine_erwerbstaetigkeit.html"],
+    "Pensionierung": ["/pensionierung/", "pensionierung.html"],
+    "Im Ausland": ["/im_ausland/", "im_ausland.html"],
+    "Steuerausweis": ["/steuerausweis/", "steuerausweis.html"],
     # Formulare
-    "Formulare": ["/formulare/"],
+    "Formulare": ["/formulare/", "formulare.html"],
     # Die EAK
-    "Unsere Produkte": ["/unsere-leistungen/"],
-    "Porträt": ["/portrait/"],
-    "Organisation": ["/organisation/"],
-    "Publikationen": ["/publikationen/"],
-    "Kurse und Beratung": ["/kurse-und-beratung/"],
-    "Offene Stellen": ["/offene-stellen/", "offene-stellen0"],
+    "Unsere Produkte": ["/unsere-leistungen/", "unsere-leistungen.html"],
+    "Porträt": ["/portrait/", "portrait.html"],
+    "Organisation": ["/organisation/", "organisation.html"],
+    "Publikationen": ["/publikationen/", "publikationen.html"],
+    "Kurse und Beratung": ["/kurse-und-beratung/", "kurse-und-beratung.html"],
+    "Offene Stellen": ["/offene-stellen/", "offene-stellen0", "offene-stellen0.html"],
     # Reform AHV 21
-    "Reform AHV 21": ["/reform-ahv21/"],
+    "Reform AHV 21": ["/reform-ahv21/", "reform-ahv21.html"],
 }
 rules_for_content = {
     "AHV": [
