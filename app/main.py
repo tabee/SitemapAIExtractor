@@ -5,7 +5,7 @@ from extracted_information_assembler import ExtractedInformationAssembler
 sitemap_url = 'https://www.eak.admin.ch/eak/de/home.sitemap.xml'
 filter_urls_by = "/de/"
 content_class = 'main-content'
-sitemap_url_k = 10
+sitemap_url_k = None
 
 # Regeln für URL- und Inhaltsanalyse
 rules_for_url = {
@@ -127,6 +127,7 @@ assembler = ExtractedInformationAssembler(
 
 try:
     assembler.extract_information()
+    assembler.do_we_have_dublicates()
     assembler.save_to_csv('extracted_data.csv')
     print("Data extraction and CSV file creation completed.")
 except Exception as e:
