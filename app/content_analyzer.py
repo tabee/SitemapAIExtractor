@@ -59,6 +59,19 @@ class ContentAnalyzer:
         """
         return self._analyze(url)
 
+    def analyze_url_depth(self, url):
+        """
+        Analyzes the given URL based on '/' and returns the depth of the URL.
+        The homepage has a depth of 0.
+
+        Args:
+            url (str): The URL to be analyzed.
+
+        Returns:
+            count (int): A list of matched predefined keywords, otherwise a list with default_keyword.
+        """
+        return (len(url.split("/")) - 6)
+
     def analyze_html_content_if_iframe(self, html_content):
         """
         Analyzes the given html_content to see if in it is an iframe.
@@ -88,3 +101,4 @@ if __name__ == "__main__":
     print(analyzer.analyze_content(content))  # Gibt ['Firmen', 'Familienausgleichskasse'] zurück
     print(analyzer.analyze_url(url))          # Gibt ['Firmen'] zurück
     print(analyzer.analyze_html_content_if_iframe(content))  # Gibt False zurück
+    print(analyzer.analyze_url_depth(url))  # Gibt 4 zurück

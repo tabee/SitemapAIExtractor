@@ -58,6 +58,7 @@ class ExtractedInformationAssembler:
                 page_last_modified_date = self.html_parser.get_last_modified_date_by_class_text_dimmed(url)
                 url_keywords = self.url_analyzer.analyze_url(url)
                 url_thema = self.url_analyzer_for_thema.analyze_url(url)
+                url_depth = self.url_analyzer.analyze_url_depth(url)
                 page_content_keywords = self.content_analyzer.analyze_content(page_content)
                 page_lead_keywords = self.content_analyzer.analyze_content(page_lead)
                 page_have_iframe = self.content_analyzer.analyze_html_content_if_iframe(page_html_content)
@@ -68,6 +69,7 @@ class ExtractedInformationAssembler:
                     "Page Title": page_title,
                     "URL Keywords": url_keywords,
                     "URL Thema": url_thema,
+                    "URL Depth": url_depth,
                     "Content Keywords": page_content_keywords,
                     "Lead Keywords": page_lead_keywords,
                     "Page Leadtext": page_lead,
