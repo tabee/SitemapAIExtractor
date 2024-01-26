@@ -21,7 +21,7 @@ class ExtractedInformationAssembler:
         save_to_csv(filename): Saves the extracted information to a CSV file.
     """
 
-    def __init__(self, sitemap_url, rules_for_url, rules_for_thema_by_url, rules_for_content, filter_urls_by, content_class, sitemap_url_k):
+    def __init__(self, sitemap_url, rules_for_url, rules_for_thema_by_url, rules_for_content, filter_urls_by, content_class, prompts_to_process, sitemap_url_k):
         """
         Initializes the ExtractedInformationAssembler with all necessary components.
 
@@ -37,7 +37,7 @@ class ExtractedInformationAssembler:
         self.url_analyzer = ContentAnalyzer(rules_for_url)
         self.url_analyzer_for_thema = ContentAnalyzer(rules_for_thema_by_url)
         self.content_analyzer = ContentAnalyzer(rules_for_content)
-        # here will be the AIContentAnalyzer ...
+        self.prompts_to_process = prompts_to_process
         self.filter_str = filter_urls_by
         self.k = sitemap_url_k
         self.content_class = content_class
@@ -67,7 +67,9 @@ class ExtractedInformationAssembler:
         try:
             filtered_urls = self.sitemap_parser.get_urls(filter_str=self.filter_str, k=self.k)
             for url in filtered_urls:
+
                 print(f"Extracting information from ...{url[-50:]}")
+                # no llm stuff
                 page_title = self.html_parser.get_title(url)
                 page_html_content = self.html_parser.get_html(url)
                 page_content = self.html_parser.get_content_by_class(url, self.content_class)
@@ -76,10 +78,14 @@ class ExtractedInformationAssembler:
                 url_keywords = self.url_analyzer.analyze_url(url)
                 url_thema = self.url_analyzer_for_thema.analyze_url(url)
                 url_depth = self.url_analyzer.analyze_url_depth(url)
-                page_numer_of_words = self.content_analyzer.analyze_count_of_words(page_content) # später page_content - gesamten Text.
+                page_numer_of_words = self.content_analyzer.analyze_count_of_words(page_content) 
                 page_content_keywords = self.content_analyzer.analyze_content(page_content)
                 page_lead_keywords = self.content_analyzer.analyze_content(page_lead)
                 page_have_iframe = self.content_analyzer.analyze_html_content_if_iframe(page_html_content)
+                # llm stuff
+                llm_processor = AIContentAnalyzer(self.prompts_to_process, url)
+                result_prompt1 = llm_processor.processes_content_by_llm("Prompt1")
+                result_prompt2 = llm_processor.processes_content_by_llm("Prompt2")
                 
                 
                 self.extracted_data.append({
@@ -94,6 +100,8 @@ class ExtractedInformationAssembler:
                     "Page Modified Date": page_last_modified_date,
                     "Have iframe": page_have_iframe,
                     "Page number of words": page_numer_of_words,
+                    "Prompt1": result_prompt1,
+                    "Prompt2": result_prompt2,
                 })
         except Exception as e:
             print(f"An error occurred: {e}")

@@ -116,6 +116,11 @@ rules_for_content = {
         "familienzulage",
         ],
 }
+prompts_to_process = {
+    "Prompt1": ["Erstelle einen SEO-konformen Website-Titel für folgenden Inhalt der Eidg. Ausgleichskasse EAK."],
+    "Prompt2": ["Prüfe den Text auf diskriminierende Inhalte. Wenn du sie findest, zitiere den entsprechenden Sart und begünde. ansonsten gib unbedingt nur 'ok' ohne Begründung zurück."],
+    # Weitere Prompts
+}  
 
 # Initialisierung und Ausführung des Informationssammlers
 assembler = ExtractedInformationAssembler(
@@ -125,7 +130,8 @@ assembler = ExtractedInformationAssembler(
     rules_for_thema_by_url=rules_for_thema_by_url,
     rules_for_content=rules_for_content,
     filter_urls_by=filter_urls_by,
-    content_class=content_class
+    content_class=content_class,
+    prompts_to_process=prompts_to_process,
 )
 
 try:

@@ -5,3 +5,4 @@ beautifulsoup4
 git+https://github.com/deepset-ai/haystack.git@v2.0.0-beta.5
 huggingface_hub
 sentence-transformers>=2.2.0
+pypdf
