@@ -1,12 +1,15 @@
 """ Main file for the execution of the information extraction. """
 from extracted_information_assembler import ExtractedInformationAssembler
+import toml
 
-# Konfiguration für die URL- und Inhaltsanalyse
-sitemap_url = 'https://www.eak.admin.ch/eak/de/home.sitemap.xml'
+# Laden der Konfigurationsdatei
+config = toml.load("config_eak.toml")
+
+# Zugriff auf die Konfigurationswerte
+sitemap_url = config["Sitemap"]["url"]
+sitemap_url_k = config["Sitemap"]["k"]
 filter_urls_by = "/de/"
 content_class = 'main-content'
-sitemap_url_k = None
-
 # Regeln für URL- und Inhaltsanalyse
 rules_for_url = {
     "Firmen": ["/firmen/"], 
