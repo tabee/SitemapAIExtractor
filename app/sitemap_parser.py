@@ -22,7 +22,7 @@ class SitemapParser:
         """
         self.sitemap_url = sitemap_url
 
-    def get_urls(self, filter_str=None):
+    def get_urls(self, filter_str=None, k=None):
         """
         Retrieves URLs from the sitemap and applies an optional filter.
 
@@ -61,7 +61,10 @@ class SitemapParser:
             if filter_str:
                 urls = [url for url in urls if filter_str in url]
 
-            print(f"Filtered to {len(urls)} URLs containing '{filter_str}'.")
+            if k:
+                urls = urls[:k]
+
+            print(f"Filtered to {len(urls)} URLs containing '{filter_str}'. (k={k})")
             return urls
         except ET.ParseError as parse_error:
             raise ET.ParseError(f"Failed to parse XML data: {parse_error}")

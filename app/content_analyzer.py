@@ -9,7 +9,7 @@ class ContentAnalyzer:
         analyze_url(url): Analyzes the URL based on predefined rules or keywords.
     """
 
-    def __init__(self, keywords_rules, default_keyword="Sonstiges"):
+    def __init__(self, keywords_rules=None, default_keyword="Sonstiges"):
         """
         Initializes the ContentAnalyzer with specific keywords and rules.
 
@@ -85,6 +85,17 @@ class ContentAnalyzer:
         soup = BeautifulSoup(html_content, 'html.parser')
         return soup.find("iframe") is not None
 
+    def analyze_count_of_words(self, content):
+        """
+        Analyzes the given content to see how many words it has.
+
+        Args:
+            content (str): The content to be analyzed.
+
+        Returns:
+            count (int): The number of words in the content.
+        """
+        return len(content.split())
 
 # Beispielhafte Verwendung
 if __name__ == "__main__":

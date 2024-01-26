@@ -5,6 +5,7 @@ from extracted_information_assembler import ExtractedInformationAssembler
 sitemap_url = 'https://www.eak.admin.ch/eak/de/home.sitemap.xml'
 filter_urls_by = "/de/"
 content_class = 'main-content'
+sitemap_url_k = 10
 
 # Regeln für URL- und Inhaltsanalyse
 rules_for_url = {
@@ -117,6 +118,7 @@ rules_for_content = {
 assembler = ExtractedInformationAssembler(
     sitemap_url=sitemap_url,
     rules_for_url=rules_for_url,
+    sitemap_url_k=sitemap_url_k,
     rules_for_thema_by_url=rules_for_thema_by_url,
     rules_for_content=rules_for_content,
     filter_urls_by=filter_urls_by,

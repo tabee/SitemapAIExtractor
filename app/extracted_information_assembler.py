@@ -20,7 +20,7 @@ class ExtractedInformationAssembler:
         save_to_csv(filename): Saves the extracted information to a CSV file.
     """
 
-    def __init__(self, sitemap_url, rules_for_url, rules_for_thema_by_url, rules_for_content, filter_urls_by, content_class):
+    def __init__(self, sitemap_url, rules_for_url, rules_for_thema_by_url, rules_for_content, filter_urls_by, content_class, sitemap_url_k):
         """
         Initializes the ExtractedInformationAssembler with all necessary components.
 
@@ -38,6 +38,7 @@ class ExtractedInformationAssembler:
         self.content_analyzer = ContentAnalyzer(rules_for_content)
         # here will be the AIContentAnalyzer ...
         self.filter_str = filter_urls_by
+        self.k = sitemap_url_k
         self.content_class = content_class
         self.extracted_data = []
 
@@ -48,7 +49,7 @@ class ExtractedInformationAssembler:
         Stores the extracted information internally.
         """
         try:
-            filtered_urls = self.sitemap_parser.get_urls(filter_str=self.filter_str)
+            filtered_urls = self.sitemap_parser.get_urls(filter_str=self.filter_str, k=self.k)
             for url in filtered_urls:
                 print(f"Extracting information from ...{url[-50:]}")
                 page_title = self.html_parser.get_title(url)
@@ -59,6 +60,7 @@ class ExtractedInformationAssembler:
                 url_keywords = self.url_analyzer.analyze_url(url)
                 url_thema = self.url_analyzer_for_thema.analyze_url(url)
                 url_depth = self.url_analyzer.analyze_url_depth(url)
+                page_numer_of_words = self.content_analyzer.analyze_count_of_words(page_content)
                 page_content_keywords = self.content_analyzer.analyze_content(page_content)
                 page_lead_keywords = self.content_analyzer.analyze_content(page_lead)
                 page_have_iframe = self.content_analyzer.analyze_html_content_if_iframe(page_html_content)
@@ -75,6 +77,7 @@ class ExtractedInformationAssembler:
                     "Page Leadtext": page_lead,
                     "Page Modified Date": page_last_modified_date,
                     "Have iframe": page_have_iframe,
+                    "Page number of words": page_numer_of_words,
                 })
         except Exception as e:
             print(f"An error occurred: {e}")
