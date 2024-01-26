@@ -42,6 +42,21 @@ class ExtractedInformationAssembler:
         self.content_class = content_class
         self.extracted_data = []
 
+    def do_we_have_dublicates(self):
+        """
+        Checks if we have dublicated page_title in the extracted_data.
+
+        Returns: True if we have dublicates, otherwise False.
+
+        """
+        for i in range(len(self.extracted_data)):
+            for j in range(i+1, len(self.extracted_data)):
+                if self.extracted_data[i]['Page Title'] == self.extracted_data[j]['Page Title']:
+                    print(f"Page Title {self.extracted_data[i]['Page Title']} is dublicated in {self.extracted_data[i]['URL']} and {self.extracted_data[j]['URL']}")
+                    return True
+        print("We don't have dublicates")
+        return False
+
     def extract_information(self):
         """
         Extracts information from the URLs in the sitemap that match the filter string.
@@ -60,7 +75,7 @@ class ExtractedInformationAssembler:
                 url_keywords = self.url_analyzer.analyze_url(url)
                 url_thema = self.url_analyzer_for_thema.analyze_url(url)
                 url_depth = self.url_analyzer.analyze_url_depth(url)
-                page_numer_of_words = self.content_analyzer.analyze_count_of_words(page_content)
+                page_numer_of_words = self.content_analyzer.analyze_count_of_words(page_content) # später page_content - gesamten Text.
                 page_content_keywords = self.content_analyzer.analyze_content(page_content)
                 page_lead_keywords = self.content_analyzer.analyze_content(page_lead)
                 page_have_iframe = self.content_analyzer.analyze_html_content_if_iframe(page_html_content)

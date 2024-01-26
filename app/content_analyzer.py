@@ -113,3 +113,4 @@ if __name__ == "__main__":
     print(analyzer.analyze_url(url))          # Gibt ['Firmen'] zurück
     print(analyzer.analyze_html_content_if_iframe(content))  # Gibt False zurück
     print(analyzer.analyze_url_depth(url))  # Gibt 4 zurück
+    print(analyzer.analyze_count_of_words(content))  # Gibt 17 zurück
