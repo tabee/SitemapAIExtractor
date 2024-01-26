@@ -1,3 +1,5 @@
+from bs4 import BeautifulSoup
+
 class ContentAnalyzer:
     """
     A class for analyzing web content without AI, using predefined keywords and rules.
@@ -57,6 +59,20 @@ class ContentAnalyzer:
         """
         return self._analyze(url)
 
+    def analyze_html_content_if_iframe(self, html_content):
+        """
+        Analyzes the given html_content to see if in it is an iframe.
+
+        Args:
+            content (str): The html_content to be analyzed.
+
+        Returns:
+            bool: True if the soup object is an iframe, otherwise False.
+        """
+        soup = BeautifulSoup(html_content, 'html.parser')
+        return soup.find("iframe") is not None
+
+
 # Beispielhafte Verwendung
 if __name__ == "__main__":
     rules = {
@@ -71,3 +87,4 @@ if __name__ == "__main__":
 
     print(analyzer.analyze_content(content))  # Gibt ['Firmen', 'Familienausgleichskasse'] zurück
     print(analyzer.analyze_url(url))          # Gibt ['Firmen'] zurück
+    print(analyzer.analyze_html_content_if_iframe(content))  # Gibt False zurück

@@ -52,6 +52,7 @@ class ExtractedInformationAssembler:
             for url in filtered_urls:
                 print(f"Extracting information from ...{url[-50:]}")
                 page_title = self.html_parser.get_title(url)
+                page_html_content = self.html_parser.get_html(url)
                 page_content = self.html_parser.get_content_by_class(url, self.content_class)
                 page_lead = self.html_parser.get_content_by_class_lead(url)
                 page_last_modified_date = self.html_parser.get_last_modified_date_by_class_text_dimmed(url)
@@ -59,6 +60,7 @@ class ExtractedInformationAssembler:
                 url_thema = self.url_analyzer_for_thema.analyze_url(url)
                 page_content_keywords = self.content_analyzer.analyze_content(page_content)
                 page_lead_keywords = self.content_analyzer.analyze_content(page_lead)
+                page_have_iframe = self.content_analyzer.analyze_html_content_if_iframe(page_html_content)
                 
                 
                 self.extracted_data.append({
@@ -70,6 +72,7 @@ class ExtractedInformationAssembler:
                     "Lead Keywords": page_lead_keywords,
                     "Page Leadtext": page_lead,
                     "Page Modified Date": page_last_modified_date,
+                    "Have iframe": page_have_iframe,
                 })
         except Exception as e:
             print(f"An error occurred: {e}")
