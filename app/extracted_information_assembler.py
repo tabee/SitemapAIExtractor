@@ -2,6 +2,7 @@ import csv
 from sitemap_parser import SitemapParser
 from html_parser import HTMLParser
 from content_analyzer import ContentAnalyzer
+from content_analyzer_ai import AIContentAnalyzer
 
 class ExtractedInformationAssembler:
     """
