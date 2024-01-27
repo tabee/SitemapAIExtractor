@@ -2,4 +2,10 @@
 # sitemap url to crawl
 url = "https://www.eak.admin.ch/eak/de/home.sitemap.xml"
 # number of pages to crawl, 0 = all
-k = 10
+k = 2
+
+[Prompts]
+[Prompts.Prompt1]
+tasks = ["Erstelle einen SEO-konformen Website-Titel für folgenden Inhalt der Eidg. Ausgleichskasse EAK."]
+[Prompts.Prompt2]
+tasks = ["Prüfe den Text auf diskriminierende Inhalte. Wenn du sie findest, zitiere den entsprechenden Satz und begründe. Ansonsten gib unbedingt nur 'ok' ohne Begründung zurück."]

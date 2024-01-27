@@ -116,10 +116,10 @@ rules_for_content = {
         "familienzulage",
         ],
 }
+
 prompts_to_process = {
-    "Prompt1": ["Erstelle einen SEO-konformen Website-Titel für folgenden Inhalt der Eidg. Ausgleichskasse EAK."],
-    "Prompt2": ["Prüfe den Text auf diskriminierende Inhalte. Wenn du sie findest, zitiere den entsprechenden Sart und begünde. ansonsten gib unbedingt nur 'ok' ohne Begründung zurück."],
-    # Weitere Prompts
+    "Prompt1": config['Prompts']['Prompt1']['tasks'],
+    "Prompt2": config['Prompts']['Prompt2']['tasks']
 }  
 
 # Initialisierung und Ausführung des Informationssammlers
