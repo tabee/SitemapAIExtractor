@@ -1,4 +1,7 @@
+import requests
 from bs4 import BeautifulSoup
+from PIL import Image
+from io import BytesIO
 
 class ContentAnalyzer:
     """
@@ -71,6 +74,58 @@ class ContentAnalyzer:
             count (int): A list of matched predefined keywords, otherwise a list with default_keyword.
         """
         return (len(url.split("/")) - 6)
+
+    def analyze_html_content_if_image(self, html_content, excluded_image_urls=[
+        '/eak/de/_jcr_content/copyright/image.imagespooler.png/1706709606228/logo.png',
+        '/eak/de/_jcr_content/logo/image.imagespooler.png/1674124800670/logo.png', 
+        '/eak/de/_jcr_content/navigation/icon.imagespooler.png/1674552485960/swiss.png', 
+        ]):
+        """
+        Extracts all image URLs from the given html_content, excluding certain URLs.
+        # @TODO: Add URL's and domain to the toml file!
+
+        Args:
+            html_content (str): The HTML content to be analyzed.
+            excluded_urls (list): A list of URLs to be excluded.
+
+        Returns:
+            list: A list of image URLs found in the HTML content, excluding the specified URLs.
+        """
+        soup = BeautifulSoup(html_content, 'html.parser')
+        img_tags = soup.find_all("img")
+        img_urls = ['https://www.eak.admin.ch'+img['src'] for img in img_tags if 'src' in img.attrs and img['src'] not in excluded_image_urls]
+        if len(img_urls) == 0:
+            return None
+        return img_urls
+
+    def analyze_list_of_image_urls(self, list_of_image_urls):
+        """
+        Returns true if at least one image has a width less than 1920 pixels, otherwise false.
+        If no image is found, returns false.
+
+        Args:
+            list_of_image_urls (list): A list of URLs of images to be analyzed.
+
+        Returns:
+            bool: True if at least one image is less than 1920 pixels wide, otherwise False.
+        """
+        if list_of_image_urls == None:
+                return False
+        
+        for url in list_of_image_urls:
+            
+            try:
+                response = requests.get(url)
+                response.raise_for_status()  # Sicherstellen, dass die Anfrage erfolgreich war
+
+                image = Image.open(BytesIO(response.content))
+                if image.size[0] < 1920:  # image.size[0] gibt die Breite des Bildes an
+                    return True
+            except Exception as e:
+                print(f"Ein Fehler ist aufgetreten beim Verarbeiten der URL {url}: {e}")
+                continue  # Fortsetzung mit der nächsten URL, falls ein Fehler auftritt
+
+        return False
 
     def analyze_html_content_if_iframe(self, html_content):
         """
