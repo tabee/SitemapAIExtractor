@@ -140,6 +140,26 @@ class ContentAnalyzer:
         soup = BeautifulSoup(html_content, 'html.parser')
         return soup.find("iframe") is not None
 
+    def analyze_html_content_if_video(self, html_content):
+        """
+        Analyzes the given html_content to see if in it is a video.
+        First, it checks if the html_content contains an iframe.
+        If it does, it checks if the iframe contains a url with the word "vimeo" or "youtube" in it.
+
+        Args:
+            content (str): The html_content to be analyzed.
+
+        Returns:
+            bool: True if the soup object is a video, otherwise False.
+        """
+        soup = BeautifulSoup(html_content, 'html.parser')
+        iframe = soup.find("iframe")
+        if iframe is not None:
+            url = iframe['src']
+            return "vimeo" in url or "youtube" in url
+        return False
+
+
     def analyze_count_of_words(self, content):
         """
         Analyzes the given content to see how many words it has.

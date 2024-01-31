@@ -100,6 +100,7 @@ class ExtractedInformationAssembler:
                 page_lead_keywords = self.content_analyzer.analyze_content(page_lead)
                 page_have_iframe = self.content_analyzer.analyze_html_content_if_iframe(page_html_content)
                 page_have_image = self.content_analyzer.analyze_html_content_if_image(page_html_content)
+                page_have_video = self.content_analyzer.analyze_html_content_if_video(page_html_content)
                 is_image_resolution_not_ok = self.content_analyzer.analyze_list_of_image_urls(page_have_image)
                 # llm stuff
                 # llm_processor = AIContentAnalyzer(self.prompts_to_process, url)
@@ -120,6 +121,7 @@ class ExtractedInformationAssembler:
                     "Have iframe": page_have_iframe,
                     "Have image": page_have_image,
                     "Have image with bad resolution": is_image_resolution_not_ok,
+                    "Have video": page_have_video,
                     "Page number of words": page_numer_of_words,
                     # "Prompt1": result_prompt1, #AI-Stuff
                     # "Prompt2": result_prompt2, #AI-Stuff
