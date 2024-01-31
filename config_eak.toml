@@ -2,7 +2,7 @@
 # sitemap url to crawl
 url = "https://www.eak.admin.ch/eak/de/home.sitemap.xml"
 # number of pages to crawl, 0 = all
-k = 10
+k = 0
 
 [Prompts]
 [Prompts.Prompt1]

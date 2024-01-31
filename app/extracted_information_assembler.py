@@ -100,9 +100,9 @@ class ExtractedInformationAssembler:
                 page_lead_keywords = self.content_analyzer.analyze_content(page_lead)
                 page_have_iframe = self.content_analyzer.analyze_html_content_if_iframe(page_html_content)
                 # llm stuff
-                llm_processor = AIContentAnalyzer(self.prompts_to_process, url)
-                result_prompt1 = llm_processor.processes_content_by_llm("Prompt1")
-                result_prompt2 = llm_processor.processes_content_by_llm("Prompt2")
+                # llm_processor = AIContentAnalyzer(self.prompts_to_process, url)
+                # result_prompt1 = llm_processor.processes_content_by_llm("Prompt1")
+                # result_prompt2 = llm_processor.processes_content_by_llm("Prompt2")
                 
                 
                 self.extracted_data.append({
@@ -117,8 +117,8 @@ class ExtractedInformationAssembler:
                     "Page Modified Date": page_last_modified_date,
                     "Have iframe": page_have_iframe,
                     "Page number of words": page_numer_of_words,
-                    "Prompt1": result_prompt1,
-                    "Prompt2": result_prompt2,
+                    # "Prompt1": result_prompt1, #AI-Stuff
+                    # "Prompt2": result_prompt2, #AI-Stuff
                 })
         except Exception as e:
             print(f"An error occurred: {e}")
