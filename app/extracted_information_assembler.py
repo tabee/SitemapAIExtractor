@@ -58,6 +58,23 @@ class ExtractedInformationAssembler:
         print("We don't have dublicates")
         return False
 
+    def do_we_have_duplicated_slugs(self):
+        """
+        Checks if we have duplicated slugs in the extracted_data.
+
+        Returns: True if we have duplicates, otherwise False.
+        """
+        slugs = [data['URL'].split('/')[-1].lower() for data in self.extracted_data]
+
+        for i in range(len(slugs)):
+            for j in range(i + 1, len(slugs)):
+                if slugs[i] == slugs[j]:
+                    print(f"Slug {self.extracted_data[i]['Page Title']} is duplicated in {self.extracted_data[i]['URL']} and {self.extracted_data[j]['URL']}")
+                    return True
+
+        print("We don't have duplicates in the Slug")
+        return False
+
     def extract_information(self):
         """
         Extracts information from the URLs in the sitemap that match the filter string.

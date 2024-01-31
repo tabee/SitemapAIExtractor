@@ -137,6 +137,7 @@ assembler = ExtractedInformationAssembler(
 try:
     assembler.extract_information()
     assembler.do_we_have_dublicates()
+    assembler.do_we_have_duplicated_slugs()
     assembler.save_to_csv('extracted_data.csv')
     print("Data extraction and CSV file creation completed.")
 except Exception as e:
