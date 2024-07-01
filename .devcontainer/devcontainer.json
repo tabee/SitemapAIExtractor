@@ -7,9 +7,11 @@
       "extensions": [
         "ms-python.python",
         "ms-toolsai.jupyter",
-        "GitHub.copilot"
+        "GitHub.copilot",
+        "janisdd.vscode-edit-csv"
       ]
     }
   },
   "postCreateCommand": "pip install -r requirements.txt"
 }
+ 
