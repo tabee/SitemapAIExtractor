@@ -1,4 +1,5 @@
 import requests
+import re
 from bs4 import BeautifulSoup
 from PIL import Image
 from io import BytesIO
@@ -158,7 +159,38 @@ class ContentAnalyzer:
             url = iframe['src']
             return "vimeo" in url or "youtube" in url
         return False
+    
+    def analyze_html_content_for_pdf_links(self, html_content, excluded_pdf_urls=None):
+        """
+        Durchsucht den HTML-Inhalt nach Links auf PDF-Dateien und gibt diese zurück,
+        sofern sie nicht in der Exclude-Liste enthalten sind.
 
+        Args:
+            html_content (str): Der zu durchsuchende HTML-Content.
+            excluded_pdf_urls (list): Optionale Liste mit URLs, die ausgeschlossen werden sollen.
+            
+        Returns:
+            list|None: Liste mit gefundenden PDF-Links oder None, falls keine gefunden wurden.
+        """
+        if excluded_pdf_urls is None:
+            excluded_pdf_urls = []
+
+        soup = BeautifulSoup(html_content, 'html.parser')
+        
+
+        # Alle <a>-Tags finden, deren href auf ".pdf" endet.
+        # Mit Regex kann man hier gut nach dem Dateiende ".pdf" suchen.
+        pdf_tags = soup.find_all("a", href=re.compile(r'\.pdf(\?.*)?$', re.IGNORECASE))
+
+        # Beispiel: Wenn du wie in deinem Bilder-Beispiel eine feste Domain voranstellen möchtest:
+        # pdf_urls = ['https://www.eak.admin.ch' + a['href'] for a in pdf_tags 
+        #             if a.get('href') not in excluded_pdf_urls]
+        #
+        # Falls du aber einfach die Links so wie sie sind zurückgeben möchtest, nutze:
+        pdf_urls = [a['href'] for a in pdf_tags 
+                    if a.get('href') not in excluded_pdf_urls]
+
+        return pdf_urls if pdf_urls else None
 
     def analyze_count_of_words(self, content):
         """
@@ -182,10 +214,11 @@ if __name__ == "__main__":
     analyzer = ContentAnalyzer(rules)
 
     content = "Dieser Produktionsplan informiert über die Termine im Zusammenhang mit der monatlichen Hauptzahlung der Familienausgleichskasse der Eidgenössischen Ausgleichskasse."
-    url = "https://www.eak.admin.ch/eak/de/home/Firmen/familienzulagen/vorgehen/produktionsplan-2024.html"
+    url = "https://www.eak.admin.ch/eak/de/home/formulare.html"
 
     print(analyzer.analyze_content(content))  # Gibt ['Firmen', 'Familienausgleichskasse'] zurück
     print(analyzer.analyze_url(url))          # Gibt ['Firmen'] zurück
     print(analyzer.analyze_html_content_if_iframe(content))  # Gibt False zurück
     print(analyzer.analyze_url_depth(url))  # Gibt 4 zurück
     print(analyzer.analyze_count_of_words(content))  # Gibt 17 zurück
+    print(analyzer.analyze_html_content_for_pdf_links(content))  # Gibt None zurück
